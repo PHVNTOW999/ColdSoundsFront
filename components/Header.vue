@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  color: #fff;
+}
 </style>

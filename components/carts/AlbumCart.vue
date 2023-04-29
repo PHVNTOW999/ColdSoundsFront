@@ -1,13 +1,13 @@
 <template>
   <div class="albumCart rounded-lg">
     <div class="albumCart__cover">
-      <img class="albumCart__cover-img" :src="album.cover">
+      <img class="albumCart__cover-img" :src="data.cover">
     </div>
     <div class="albumCart__info text-center">
-      <p class="truncate underline">{{ album.name }}</p>
-      <p class="truncate underline">{{ album.singers }}</p>
-      <p class="truncate">{{ album.featuring }}</p>
-      <p class="truncate">{{ single.type }} - {{ single.date }}</p>
+      <p class="truncate underline">{{ data.name }}</p>
+      <p class="truncate underline">{{ data.singers }}</p>
+      <p class="truncate">{{ data.featuring }}</p>
+      <p class="truncate">{{ data.type }} - {{ data.date }}</p>
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@
 export default {
   name: "albumCart",
   props: {
-    album: Object
+    data: Object
   }
 }
 </script>

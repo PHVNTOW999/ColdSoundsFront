@@ -6,7 +6,7 @@
         <img class="singlePage__cover-img" src="">
       </div>
       <div class="singlePage__name">
-        {{ single.cover }}
+        {{ this.$route.query.id || 'Non' }}
       </div>
       <div class="singlePage__stats">
 
@@ -23,9 +23,9 @@
 
 <script>
 export default {
-  name: "SinglePage",
+  name: "single",
   props: {
-    single: Object
+    data: Object,
   }
 }
 </script>

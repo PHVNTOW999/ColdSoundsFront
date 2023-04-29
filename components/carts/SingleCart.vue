@@ -7,10 +7,9 @@
       <p class="truncate underline">{{ single.name }}</p>
       <p class="truncate underline">{{ single.singers }}</p>
       <p class="truncate">{{ single.featuring }}</p>
-      <p class="truncate">{{ single.date }}</p>
+      <p class="truncate">{{ single.type }} - {{ single.date }}</p>
     </div>
   </div>
-<!--  AftërLyAftërLyfeAftërLyfefe1-->
 </template>
 
 <script>

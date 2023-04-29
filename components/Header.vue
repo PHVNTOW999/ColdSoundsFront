@@ -3,6 +3,8 @@
     <nav>
       <router-link class="underline hover:text-indigo-600" to="/Home">Home</router-link>
       <router-link class="underline hover:text-indigo-600" to="/News">News</router-link>
+      <router-link class="underline hover:text-indigo-600" to="/News">Random</router-link>
+      <router-link class="underline hover:text-indigo-600" to="/SinglePage">single page</router-link>
     </nav>
     <div class="user inline-flex">
       <p class="mr-5">admin</p>

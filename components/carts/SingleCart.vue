@@ -16,16 +16,22 @@
       <img class="singleCart__cover-img" :src="data.cover">
     </div>
     <div class="singleCart__info text-center">
-      <p class="truncate underline" @click="singleLink">{{ data.name }}</p>
-      <p class="truncate underline">{{ data.singers }}</p>
-      <p class="truncate">{{ data.featuring }}</p>
+      <router-link :to="{ path: `/single/${this.data.slug_id}` }">
+      <p class="truncate underline">
+          {{ data.name }}
+      </p>
+      </router-link>
+      <p class="truncate underline">
+        <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist }}</span>
+      </p>
+      <p class="truncate" v-if="data.feat.length">{{ data.feat }}</p>
       <p class="truncate">{{ data.type }} - {{ data.date }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import single from "~/pages/Single.vue";
+import single from "~/pages/Single/_id.vue";
 
 export default {
   name: "SingleCart",
@@ -33,10 +39,9 @@ export default {
     data: Object
   },
   methods: {
-    singleLink() {
-      console.log('gg')
-      this.$router.push({ path: '/single:id', component: single, params: { id: this.data.slug_id } })
-    }
+    // singleLink() {
+    //   this.$router.push({ path: '/single', params: { id: '5' } })
+    // }
   }
 }
 </script>

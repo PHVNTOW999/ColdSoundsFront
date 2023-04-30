@@ -3,10 +3,10 @@
     <Header />
     <div class="singlePage">
       <div class="singlePage__cover">
-        <img class="singlePage__cover-img" src="">
+        <img class="singlePage__cover-img w-1/4" :src="this.single.cover">
       </div>
       <div class="singlePage__name">
-        {{ this.$route.query.id || 'Non' }}
+        {{ this.single.name }}
       </div>
       <div class="singlePage__stats">
 
@@ -24,8 +24,13 @@
 <script>
 export default {
   name: "single",
-  props: {
-    data: Object,
+  computed: {
+    id() {
+      return this.$route.params.id
+    },
+    single() {
+      return this.$store.state.user.singles[this.id]
+    }
   }
 }
 </script>

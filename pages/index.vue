@@ -10,6 +10,12 @@ export default {
   components: {
     Home
   },
+  mounted() {
+    // axios.get('')
+    // const ip = this.$axios.$get('api/singles/').then((data) => {
+    //   console.log(data)
+    // })
+  }
 }
 </script>
 

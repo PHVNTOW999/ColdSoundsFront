@@ -13,7 +13,7 @@
           type="is-primary">
         </b-icon>
       </div>
-      <img class="singleCart__cover-img" :src="data.cover">
+      <img class="singleCart__cover-img" src="https://media.pitchfork.com/photos/63222b2752d4bd45efccbadf/1:1/w_600/Yeat.jpg">
     </div>
     <div class="singleCart__info text-center">
       <router-link :to="{ path: `/single/${this.data.slug_id}` }">

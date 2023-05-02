@@ -1,3 +1,6 @@
+// Local api
+const api = 'http://127.0.0.1:8000/'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -35,7 +38,21 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api/': { target: api}
+  },
+
+  server: {
+    host: '0.0.0.0',
+    port: 3000
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

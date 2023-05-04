@@ -22,10 +22,10 @@
       </p>
       </router-link>
       <p class="truncate underline">
-        <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist }}</span>
+        <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
       </p>
       <p class="truncate" v-if="data.feat.length">{{ data.feat }}</p>
-      <p class="truncate">{{ data.type }} - {{ data.date }}</p>
+      <p class="truncate">{{ data.format }} - {{ data.date }}</p>
     </div>
   </div>
 </template>

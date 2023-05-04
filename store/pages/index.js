@@ -1,65 +1,41 @@
-// import Vuex from "vuex";
-//
-// new Vuex.Store({
-//   state: () => ({
-//     news: []
-//   }),
-//   getters: () => ({
-//     NEWS(state) {
-//       return state.news
-//     }
-//   }),
-//   mutations: {
-//     SET_SINGLES(state, payload) {
-//       state.news = payload
-//     }
-//   },
-//   actions: {
-//     GET_SINGLES({ commit }) {
-//       return new Promise((res, rej) => {
-//         console.log('ff')
-//         this.$axios.$get('api/singles/').then((data) => {
-//           commit('SET_SINGLES', data)
-//           res(data)
-//         }).catch((error) => { rej(console.log(error)) })
-//     })
-//   }
-//   }
-// })
+export const state = {
+  singles: [],
+  albums: []
+}
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
-export const state = () => ({
-  news: [],
-  test: 21,
-})
-
-export const getters = () => ({
-  NEWS(state) {
-    return state.news
+export const getters = {
+  SINGLES(state) {
+    return state.singles
   },
-  test(state) {
-    return state.test
+  ALBUMS(state) {
+    return state.albums
   }
-})
+}
 
-export const mutation = () => ({
+export const mutations = {
   SET_SINGLES(state, payload) {
-    state.news = payload
+    state.singles = payload
+  },
+  SET_ALBUMS(state, payload) {
+    state.albums = payload
   }
-})
+}
 
-export const actions = () => ({
+export const actions = {
   GET_SINGLES({ commit }) {
     return new Promise((res, rej) => {
-      console.log('ff')
       this.$axios.$get('api/singles/').then((data) => {
         commit('SET_SINGLES', data)
         res(data)
       }).catch((error) => { rej(console.log(error)) })
     })
+  },
+  GET_ALBUMS({ commit }) {
+    return new Promise((res, rej) => {
+      this.$axios.$get('api/albums/').then((data) => {
+        commit('SET_ALBUMS', data)
+        res(data)
+      }).catch((error) => { rej(console.log(error)) })
+    })
   }
-})
+}

@@ -4,18 +4,14 @@
 
 <script>
 import Home from "~/pages/Home.vue";
+import Header from "~/components/Header.vue";
 
 export default {
   name: 'IndexPage',
   components: {
-    Home
+    Home,
+    Header,
   },
-  mounted() {
-    // axios.get('')
-    // const ip = this.$axios.$get('api/singles/').then((data) => {
-    //   console.log(data)
-    // })
-  }
 }
 </script>
 

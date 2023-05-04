@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     news page
     <div class="flex justify-between w-100">
 <!--      <singleCart v-for="(single, i) in news"-->
@@ -22,16 +21,16 @@ export default {
       doneCount: 'pages/test'
     })
   },
-  // methods: {
-  //   ...mapActions(
-  //     {
-  //       GET_SINGLES:'pages/GET_SINGLES',
-  //     }
-  //   ),
-  // },
-  // created() {
-  //   this.GET_SINGLES()
-  // }
+  methods: {
+    ...mapActions(
+      {
+        GET_SINGLES:'pages/GET_SINGLES',
+      }
+    ),
+  },
+  created() {
+    this.GET_SINGLES()
+  }
 }
 </script>
 

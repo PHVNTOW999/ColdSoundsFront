@@ -16,11 +16,14 @@
       <img class="singleCart__cover-img" src="https://media.pitchfork.com/photos/63222b2752d4bd45efccbadf/1:1/w_600/Yeat.jpg">
     </div>
     <div class="singleCart__info text-center">
-      <router-link :to="{ path: `/single/${this.data.slug_id}` }">
-      <p class="truncate underline">
-          {{ data.name }}
+      <p class="truncate underline" @click="modalActive = true">
+<!--          {{ data.name }}-->
+        <modelCart :data="data" :active="modalActive">
+          <template v-slot:name>
+            {{ data.name }}
+          </template>
+        </modelCart>
       </p>
-      </router-link>
       <p class="truncate underline">
         <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
       </p>
@@ -32,17 +35,17 @@
 
 <script>
 import single from "~/pages/Single/_id.vue";
+import ModelCart from "~/components/carts/modelCart.vue";
 
-export default {
-  name: "SingleCart",
-  props: {
-    data: Object
-  },
-  methods: {
-    // singleLink() {
-    //   this.$router.push({ path: '/single', params: { id: '5' } })
-    // }
-  }
+  export default {
+    name: "SingleCart",
+    components: { ModelCart },
+    props: { data: Object },
+    data() {
+      return {
+        modalActive: false,
+      }
+    }
 }
 </script>
 

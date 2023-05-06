@@ -1,16 +1,18 @@
 <template>
   <div class="footer">
-    <p>kl</p>
-    <iframe :src=`./assets/Player/playerjs.html?file=${file}`
-            type="text/html"
-            allowfullscreen />
-<!--    {{ file }}-->
-<!--    <img :src="cover" >-->
-    <a :href="cover" :download="cover">Download</a>
-    <audio :src="file" controls>
-      <source :src="file" type="video/mp3" />
-      <source :src="file" type="video/wav" />
-    </audio>
+<!--    <audio class="audio" v-if="file" :src="file" controls>-->
+<!--      <source :src="file" type="video/mp3" />-->
+<!--      <source :src="file" type="video/wav" />-->
+<!--      <p>-->
+<!--        error-->
+<!--      </p>-->
+<!--    </audio>-->
+<!--    <div id="player"></div>-->
+<!--        <iframe-->
+<!--          src="./Future.mp3"-->
+<!--          type="text/html" width=400 height=300-->
+<!--          allowfullscreen />-->
+    <iframe src="playerjs.html?file=https://plrjs.com/x.mp4" type="text/html" width=400 height=300 frameborder="0" allowfullscreen></iframe>
   </div>
 </template>
 
@@ -40,6 +42,8 @@ export default {
 
 <style scoped>
 .footer {
+  margin: 0;
+  padding: 0;
   background-color: #938888;
   display: block;
   position: absolute;
@@ -47,5 +51,14 @@ export default {
   z-index: 999999999;
   width: 100%;
   max-height: 100px;
+  .audio {
+    width: 100%;
+    background-color: #3b0000;
+    border-radius: 0;
+  }
+  .audio::-webkit-media-controls-panel {
+    background-color: #56AEFF;
+    border-radius: 0;
+  }
 }
 </style>

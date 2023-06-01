@@ -23,6 +23,5 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
-  padding: 0 10px 0 10px;
 }
 </style>

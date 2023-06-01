@@ -13,11 +13,11 @@
           type="is-primary">
         </b-icon>
       </div>
-      <img class="singleCart__cover-img" src="https://media.pitchfork.com/photos/63222b2752d4bd45efccbadf/1:1/w_600/Yeat.jpg">
+      <img class="singleCart__cover-img" :src="data.cover">
     </div>
     <div class="singleCart__info text-center">
       <p class="truncate underline" @click="modalActive = true">
-<!--          {{ data.name }}-->
+          {{ data.name }}
         <modelCart :data="data" :active="modalActive">
           <template v-slot:name>
             {{ data.name }}

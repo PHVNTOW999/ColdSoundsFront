@@ -1,5 +1,7 @@
 // Local api
 const api = 'http://127.0.0.1:8000/'
+// Server api
+// const api = 'http://188.94.156.116:10000/'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target

@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="flex justify-between w-100">
-      <singleCart v-for="(single, i) in NEWS"
+      <singleCart v-for="(single, i) in SINGLES"
                   :data="single"
+                  :key="i" />
+    </div>
+    <div class="flex justify-between w-100">
+      <albumCart v-for="(album, i) in ALBUMS"
+                  :data="album"
                   :key="i" />
     </div>
   </div>
@@ -10,27 +15,21 @@
 
 <script>
 import SingleCart from "~/components/carts/SingleCart.vue";
-import {mapActions, mapGetters} from "vuex";
+import {mapGetters} from "vuex";
+import AlbumCart from "~/components/carts/AlbumCart.vue";
 
 export default {
   name: "Home",
-  components: {SingleCart},
+  components: {AlbumCart, SingleCart},
   computed: {
     ...mapGetters({
-      NEWS: "pages/SINGLES",
+      SINGLES: "pages/SINGLES",
+      ALBUMS: 'pages/ALBUMS'
     }),
-    singles() {
-      return this.$store.state.user.singles
-    }
-  },
-  methods: {
-    // ...mapActions(['pages/GET_SINGLES'])
-    async getNews() {
-      await this.$store.dispatch('pages/GET_SINGLES')
-    }
   },
   created() {
-    this.getNews()
+    this.$store.dispatch('pages/GET_SINGLES')
+    this.$store.dispatch('pages/GET_ALBUMS')
   }
 }
 </script>

@@ -17,11 +17,11 @@ export default {
 
 <style>
 html {
-  width: 100%;
-  height: 100%;
+  //width: 100%;
+  //height: 100%;
   background-image: url('./assets/img/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  overflow: hidden;
+  //overflow: hidden;
 }
 </style>

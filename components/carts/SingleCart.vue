@@ -1,17 +1,24 @@
 <template>
   <div class="singleCart rounded-lg">
-    <div class="singleCart__cover">
+    <div class="singleCart__cover flex items-center">
       <div class="singleCart__cover-icons absolute">
-        <b-icon
-          icon="play"
-          size="is-large"
-          type="is-primary">
-        </b-icon>
-        <b-icon
-          icon="heart"
-          size="is-small"
-          type="is-primary">
-        </b-icon>
+        <div class="w-full flex flex-col items-center">
+          <div class="play_btn" @click="play()">
+            <b-icon
+              icon="play"
+              size="is-large"
+              type="is-primary">
+            </b-icon>
+          </div>
+          <div class="fav_btn">
+            <b-icon
+              class="w-full"
+              icon="heart"
+              size="is-small"
+              type="is-primary">
+            </b-icon>
+          </div>
+        </div>
       </div>
       <img class="singleCart__cover-img" :src="data.cover">
     </div>
@@ -45,6 +52,9 @@ import ModelCart from "~/components/carts/modelCart.vue";
       return {
         modalActive: false,
       }
+    },
+    methods: {
+      play() { this.$store.commit('player/SET_TRACK', this.data) }
     }
 }
 </script>
@@ -55,6 +65,9 @@ import ModelCart from "~/components/carts/modelCart.vue";
   height: 275px;
   color: #fff;
   background-color: #000;
+}
+.singleCart__cover-icons {
+  width: 200px;
 }
 .singleCart__cover-img {
   border-radius: 0.5rem 0.5rem 0 0;

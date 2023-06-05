@@ -34,7 +34,7 @@
       <p class="truncate underline">
         <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
       </p>
-      <p class="truncate" v-if="data.feat.length">{{ data.feat }}</p>
+      <p class="truncate" v-if="data.feats.length">{{ data.feat }}</p>
       <p class="truncate">{{ data.format }} - {{ data.date }}</p>
     </div>
   </div>
@@ -54,7 +54,10 @@ import ModelCart from "~/components/carts/modelCart.vue";
       }
     },
     methods: {
-      play() { this.$store.commit('player/SET_TRACK', this.data) }
+      play() {
+        this.$store.commit('player/SET_ENV', null)
+        this.$store.commit('player/SET_TRACK', this.data)
+      }
     }
 }
 </script>

@@ -8,27 +8,45 @@
     <div class="wrapper flex justify-between">
 
       <div class="meta">
-        <div class="cover w-20">
-          <img :src="track.cover">
+        <div v-if="env">
+          <div class="cover w-20">
+            <img :src="env.cover">
+          </div>
+          <div class="name">
+            {{ track.name }}
+          </div>
+          <div class="artist">
+            <span v-for="artist in env.artists" :key="artist.uuid">{{ artist.name }}</span>
+          </div>
         </div>
-        <div class="name">
-          {{ track.name }}
-        </div>
-        <div class="artist">
-          <span v-for="artist in track.artists" :key="artist.uuid">{{ artist.name }}</span>
+        <div v-else>
+          <div class="cover w-20">
+            <img :src="track.cover">
+          </div>
+          <div class="name">
+            {{ track.name }}
+          </div>
+          <div class="artist">
+            <span v-for="artist in track.artists" :key="artist.uuid">{{ artist.name }}</span>
+          </div>
         </div>
       </div>
 
       <div class="control">
-        <div class="prevBtn" @click="pervTrack()"><button> < </button></div>
-        <div class="play" v-if="pause" @click="playTrack()"><button> Play </button></div>
-        <div class="pause" v-if="play" @click="pauseTrack()"><button> Pause </button></div>
-        <div class="nextBtn" @click="nextTrack()"><button> > </button></div>
+        <div class="prevBtn" @click="$store.commit('player/SET_PERV_TRACK')"><button> < </button></div>
+        <div class="play" v-if="play == false" @click="playTrack()"><button> Play </button></div>
+        <div class="pause" v-else @click="pauseTrack()"><button> Pause </button></div>
+        <div class="nextBtn" @click="$store.commit('player/SET_NEXT_TRACK')"><button> > </button></div>
       </div>
 
       <div class="func">
         <div class="time">
-          {{ calcTime(this.time.current) }} - {{ calcTime(this.time.duration) }}
+          <div v-if="this.time.duration > 0">
+            {{ calcTime(this.time.current) }} - {{ calcTime(this.time.duration) }}
+          </div>
+          <div v-else>
+            00:00 - 00:00
+          </div>
         </div>
         <div class="volume">
           <b-field label="Volume">
@@ -36,7 +54,7 @@
             </b-slider>
           </b-field>
         </div>
-        <button>Loop</button>
+        <button @click="loopTrack()">Loop</button>
         <button>Add song</button>
         <button>Add song in...</button>
         <button>Download</button>
@@ -47,8 +65,8 @@
       <source :src="track.file" type='audio/wav' />
       <source :src="track.file" type='audio/mp3' />
     </audio>
-  </div>
 
+  </div>
 </template>
 
 <script>
@@ -58,8 +76,8 @@ export default {
   data() {
     return {
       play: false,
-      pause: true,
       volume: 25,
+      loop: false,
       time: {
         current: null,
         duration: null,
@@ -69,26 +87,26 @@ export default {
   methods: {
     playTrack() {
       this.$refs.audio.play()
-
       this.play = true
-      this.pause = false
     },
     pauseTrack() {
       this.$refs.audio.pause()
-
-      this.pause = true
       this.play = false
-    },
-    pervTrack() {
-      this.$refs.audio.load()
-    },
-    nextTrack() {
-      this.$refs.audio.load()
     },
     setVolume() {
       if(this.volume < 10) this.$refs.audio.volume = `0.0${this.volume}`
       else if (this.volume == 100) this.$refs.audio.volume = 1
       else this.$refs.audio.volume = `0.${this.volume}`
+    },
+    loopTrack() {
+      if(this.loop == false) {
+        this.$refs.audio.loop = true
+        this.loop = true
+      }
+      else {
+        this.$refs.audio.loop = false
+        this.loop = false
+      }
     },
     calcTime(sec) {
       let min = Math.floor(sec/60)
@@ -124,6 +142,7 @@ export default {
     track() {
       this.$refs.audio.load()
       this.$refs.audio.play();
+      this.play = true
     }
   },
   mounted() {

@@ -1,37 +1,83 @@
 <template>
-  <div class="albumCart rounded-lg">
-    <div class="albumCart__cover">
-      <img class="albumCart__cover-img" :src="data.cover">
+  <div class="albumCard rounded-lg">
+    <div class="albumCard__cover flex items-center">
+      <div class="albumCard__cover-icons absolute">
+        <div class="w-full flex flex-col items-center">
+          <div class="play_btn" @click="play()">
+            <b-icon
+              icon="play"
+              size="is-large"
+              type="is-primary">
+            </b-icon>
+          </div>
+          <div class="fav_btn">
+            <b-icon
+              class="w-full"
+              icon="heart"
+              size="is-small"
+              type="is-primary">
+            </b-icon>
+          </div>
+        </div>
+      </div>
+      <img class="albumCard__cover-img" :src="data.cover">
     </div>
-    <div class="albumCart__info text-center">
-      <p class="truncate underline">{{ data.name }}</p>
-      <p class="truncate underline">{{ data.singers }}</p>
-      <p class="truncate">{{ data.featuring }}</p>
-      <p class="truncate">{{ data.type }} - {{ data.date }}</p>
+    <div class="albumCard__info text-center">
+      <p class="truncate underline" @click="modalActive = true">
+        {{ data.name }}
+        <modelCart :data="data" :active="modalActive">
+          <template v-slot:name>
+            {{ data.name }}
+          </template>
+        </modelCart>
+      </p>
+      <p class="truncate underline">
+        <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
+      </p>
+      <div class="truncate" v-if="data.feats.length">
+        <span v-for="feat in data.feats" :key="feat.uuid">{{ feat.name }}</span>
+      </div>
+<!--      <p class="truncate">{{ data.format }} - {{ data.date }}</p>-->
     </div>
   </div>
 </template>
 
 <script>
+import single from "~/pages/Single/_id.vue";
+import ModelCart from "~/components/carts/modelCart.vue";
+
 export default {
-  name: "albumCart",
-  props: {
-    data: Object
+  name: "AlbumCard",
+  components: { ModelCart },
+  props: { data: Object },
+  data() {
+    return {
+      modalActive: false,
+    }
+  },
+  methods: {
+    play() {
+      this.$store.commit('player/SET_ENV', this.data)
+      this.$store.commit('player/SET_TRACK', this.data.files[0])
+    }
   }
 }
 </script>
 
 <style scoped>
-.albumCart {
+.albumCard {
   width: 200px;
   height: 275px;
   color: #fff;
   background-color: #000;
 }
-.albumCart__cover-img {
+.albumCard__cover-icons {
+  width: 200px;
+}
+.albumCard__cover-img {
   border-radius: 0.5rem 0.5rem 0 0;
 }
-.albumCart__info {
+.albumCard__info {
   padding: 0 5px 0 5px;
   height: 74px;
 }

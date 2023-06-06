@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <img class="singleCart__cover-img" :src="data.cover">
+      <img class="singleCart__cover-img" :src="data.cover || data.album.cover">
     </div>
     <div class="singleCart__info text-center">
       <p class="truncate underline" @click="modalActive = true">

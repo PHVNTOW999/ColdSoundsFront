@@ -7,7 +7,7 @@
 
     <div class="wrapper flex justify-between">
 
-      <div class="meta">
+      <div class="meta w-1/3">
         <div v-if="env">
           <div class="cover w-20">
             <img :src="env.cover">
@@ -32,14 +32,36 @@
         </div>
       </div>
 
-      <div class="control">
-        <div class="prevBtn" @click="$store.commit('player/SET_PERV_TRACK')"><button> < </button></div>
-        <div class="play" v-if="play == false" @click="playTrack()"><button> Play </button></div>
-        <div class="pause" v-else @click="pauseTrack()"><button> Pause </button></div>
-        <div class="nextBtn" @click="$store.commit('player/SET_NEXT_TRACK')"><button> > </button></div>
+      <div class="control flex justify-between w-1/3">
+        <div class="prevBtn">
+          <b-button
+            type="is-dark"
+            @click="$store.commit('player/SET_PERV_TRACK')"
+            :disabled="!this.env">
+            <
+          </b-button>
+        </div>
+        <div class="play" v-if="play == false">
+          <b-button type="is-dark" @click="playTrack()">
+            Play
+          </b-button>
+        </div>
+        <div class="pause" v-else @click="pauseTrack()">
+          <b-button type="is-dark" @click="pauseTrack()">
+            Pause
+          </b-button>
+        </div>
+        <div class="nextBtn">
+          <b-button
+            type="is-dark"
+            @click="$store.commit('player/SET_NEXT_TRACK')"
+            :disabled="!this.env">
+            >
+          </b-button>
+        </div>
       </div>
 
-      <div class="func">
+      <div class="func w-1/3">
         <div class="time">
           <div v-if="this.time.duration > 0">
             {{ calcTime(this.time.current) }} - {{ calcTime(this.time.duration) }}

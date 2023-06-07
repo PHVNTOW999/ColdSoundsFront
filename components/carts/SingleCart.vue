@@ -1,5 +1,6 @@
 <template>
   <div class="singleCart rounded-lg">
+
     <div class="singleCart__cover flex items-center">
       <div class="singleCart__cover-icons absolute">
         <div class="w-full flex flex-col items-center">
@@ -22,21 +23,44 @@
       </div>
       <img class="singleCart__cover-img" :src="data.cover || data.album.cover">
     </div>
+
     <div class="singleCart__info text-center">
       <p class="truncate underline" @click="modalActive = true">
           {{ data.name }}
-        <modelCart :data="data" :active="modalActive">
-          <template v-slot:name>
-            {{ data.name }}
-          </template>
-        </modelCart>
       </p>
       <p class="truncate underline">
         <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
       </p>
-      <p class="truncate" v-if="data.feats.length">{{ data.feat }}</p>
+      <p class="truncate underline" v-if="data.feats.length">
+        <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
+      </p>
       <p class="truncate">{{ data.format }} - {{ data.date }}</p>
     </div>
+
+    <b-modal v-model="modalActive" :width="640">
+      <div class="modalWin">
+        <div class="modalWin_cover">
+          <img class="singleCart__cover-img" :src="data.cover || data.album.cover">
+        </div>
+        <div class="modalWin__name">
+          <h1>{{ data.name }}</h1>
+        </div>
+        <div class="modalWin__artists">
+          <p class="truncate underline">
+            <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
+          </p>
+        </div>
+        <div class="modalWin__feats">
+          <p class="truncate underline" v-if="data.feats.length">
+            <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
+          </p>
+        </div>
+        <div class="modalWin__date">
+          <p class="truncate">{{ data.format }} - {{ data.date }}</p>
+        </div>
+      </div>
+    </b-modal>
+
   </div>
 </template>
 

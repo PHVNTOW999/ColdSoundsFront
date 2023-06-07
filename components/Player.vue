@@ -46,8 +46,8 @@
             Play
           </b-button>
         </div>
-        <div class="pause" v-else @click="pauseTrack()">
-          <b-button type="is-dark" @click="pauseTrack()">
+        <div class="pause" v-else>
+          <b-button type="is-dark" @click="playTrack()">
             Pause
           </b-button>
         </div>
@@ -108,12 +108,21 @@ export default {
   },
   methods: {
     playTrack() {
-      this.$refs.audio.play()
-      this.play = true
-    },
-    pauseTrack() {
-      this.$refs.audio.pause()
-      this.play = false
+      if(this.track.file && this.play == false) {
+        this.$refs.audio.play()
+        this.play = true
+      } else if(this.track.file && this.play == true) {
+        this.$refs.audio.pause()
+        this.play = false
+      } else {
+        const notif = this.$buefy.notification.open({
+          duration: 5000,
+          message: `Error`,
+          position: 'is-bottom-right',
+          type: 'is-danger',
+          hasIcon: true
+        })
+      }
     },
     setVolume() {
       if(this.volume < 10) this.$refs.audio.volume = `0.0${this.volume}`

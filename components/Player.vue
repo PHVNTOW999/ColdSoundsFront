@@ -1,8 +1,21 @@
 <template>
   <div class="player">
 
-    <div class="progress_bar" ref="progress_bar" @click="setProgress($event)">
-      <span class="progress" ref="progress"></span>
+    <div>
+      <div class="progress_bar"
+           ref="progress_bar"
+           @click="setProgress($event)"
+           @mousemove="checkProgress($event)"
+           @mouseenter="showCheckProg($event)"
+           @mouseleave="hiddenCheckProg($event)">
+        <div
+          v-if="isShowCheckTime"
+          class="tooltipe"
+          ref="progress_check">{{ calcTime(this.checkingTime) }}
+        </div>
+
+        <span class="progress" ref="progress"></span>
+      </div>
     </div>
 
     <div class="wrapper flex justify-between">
@@ -21,7 +34,7 @@
         </div>
         <div v-else>
           <div class="cover w-20">
-            <img :src="track.cover">
+            <img :src="track.cover || track.album.cover">
           </div>
           <div class="name">
             {{ track.name }}
@@ -42,12 +55,12 @@
           </b-button>
         </div>
         <div class="play" v-if="play == false">
-          <b-button type="is-dark" @click="playTrack()">
+          <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.file">
             Play
           </b-button>
         </div>
         <div class="pause" v-else>
-          <b-button type="is-dark" @click="playTrack()">
+          <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.file">
             Pause
           </b-button>
         </div>
@@ -100,6 +113,8 @@ export default {
       play: false,
       volume: 25,
       loop: false,
+      isShowCheckTime: false,
+      checkingTime: null,
       time: {
         current: null,
         duration: null,
@@ -146,16 +161,33 @@ export default {
       sec = (sec >= 10) ? sec : "0" + sec
       return min + ":" + sec
     },
-    setProgress: function(event) {
-      const width = this.$refs.progress_bar.clientWidth
-      const clickX = event.offsetX
-      const duration = this.$refs.audio.duration
-
-      this.$refs.audio.currentTime = (clickX / width) * duration
-    },
     trackProgress() {
       const progressPercent = (this.$refs.audio.currentTime / this.$refs.audio.duration ) * 100
       this.$refs.progress.style.width = `${progressPercent}%`
+    },
+    setProgress: function(event) {
+      const width = this.$refs.progress_bar.clientWidth
+      const eventX = event.offsetX
+      const duration = this.$refs.audio.duration
+
+      this.$refs.audio.currentTime = (eventX / width) * duration
+    },
+    checkProgress: function(event) {
+      const width = this.$refs.progress_bar.clientWidth
+      const eventX = event.offsetX
+      const duration = this.$refs.audio.duration
+
+      this.checkingTime = (eventX / width) * duration
+
+      this.$refs.progress_check.style.left = (eventX + 'px')
+    },
+    showCheckProg() {
+      this.isShowCheckTime = true
+      console.log('y')
+    },
+    hiddenCheckProg() {
+      this.isShowCheckTime = false
+      console.log('n')
     }
   },
   computed: {
@@ -182,6 +214,9 @@ export default {
     // events
     this.$refs.audio.load()
     this.$refs.audio.addEventListener('timeupdate', this.trackProgress)
+    this.$refs.audio.addEventListener('click', this.checkProgress)
+    this.$refs.audio.addEventListener('mousemove', this.showCheckProg)
+    this.$refs.audio.addEventListener('mousemove', this.hiddenCheckProg)
     this.$refs.audio.addEventListener('timeupdate', () =>
       this.time = {
         current: this.$refs.audio.currentTime,
@@ -207,6 +242,13 @@ export default {
     align-items: center;
     background-color: gray;
     cursor: pointer;
+    .tooltipe {
+      position: absolute;
+      bottom: 136px;
+      background-color: yellowgreen;
+      //transition-duration: 0.1s;
+      transform: scale(0.9);
+    }
     .progress {
       width: 0;
       height: 100%;

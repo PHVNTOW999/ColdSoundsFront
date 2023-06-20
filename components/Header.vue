@@ -18,22 +18,36 @@
       </router-link>
 
     </nav>
-    <div class="user inline-flex">
-      <p class="mr-5">{{ user.username }}</p>
-      <p>{{ user.email }}</p>
-    </div>
+<!--    <div class="user inline-flex">-->
+<!--      <p class="mr-5">{{ user.username }}</p>-->
+<!--      <p>{{ user.email }}</p>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
+
 export default {
   name: "Header",
-  computed: {
-    links() {
-      return this.$store.state.header.links
-    },
-    user() {
-      return this.$store.state.user.user
+  data() {
+    return {
+      links: [
+        {
+          id: 0,
+          name: 'Home',
+          path: '/'
+        },
+        {
+          id: 1,
+          name: 'News',
+          path: '/News'
+        },
+        {
+          id: 2,
+          name: 'single page',
+          path: '/Single'
+        }
+      ]
     }
   }
 }

@@ -13,7 +13,10 @@ export const state = () => ({
     "file": "",
     "date": "",
     "artists": [],
-    "feats": []
+    "feats": [],
+    album: {
+      cover: null,
+    }
   }
 })
 

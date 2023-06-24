@@ -25,11 +25,6 @@
     <div class="albumCard__info text-center">
       <p class="truncate underline" @click="modalActive = true">
         {{ data.name }}
-        <modelCart :data="data" :active="modalActive">
-          <template v-slot:name>
-            {{ data.name }}
-          </template>
-        </modelCart>
       </p>
       <p class="truncate underline">
         <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
@@ -43,12 +38,9 @@
 </template>
 
 <script>
-import single from "~/pages/Single/_id.vue";
-import ModelCart from "~/components/carts/modelCart.vue";
 
 export default {
   name: "AlbumCard",
-  components: { ModelCart },
   props: { data: Object },
   data() {
     return {

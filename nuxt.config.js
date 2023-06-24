@@ -5,8 +5,8 @@ const api = 'http://127.0.0.1:8000/'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-  ssr: false,
+  target: 'server',
+  ssr: true,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

@@ -65,12 +65,9 @@
 </template>
 
 <script>
-import single from "~/pages/Single/_id.vue";
-import ModelCart from "~/components/carts/modelCart.vue";
 
   export default {
     name: "SingleCart",
-    components: { ModelCart },
     props: { data: Object },
     data() {
       return {

@@ -1,5 +1,9 @@
 <template>
-  <Home />
+  <div>
+    <Header />
+    <Home />
+    <Player />
+  </div>
 </template>
 
 <script>
@@ -12,6 +16,9 @@ export default {
     Home,
     Header,
   },
+  created() {
+    this.$store.commit('user/CHECK_LS_AUTH')
+  }
 }
 </script>
 

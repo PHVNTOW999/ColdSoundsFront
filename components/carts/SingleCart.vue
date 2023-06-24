@@ -80,6 +80,8 @@ import ModelCart from "~/components/carts/modelCart.vue";
     methods: {
       play() {
         this.$store.commit('player/SET_ENV', null)
+        this.$store.commit('player/SET_TRACK', null)
+
         this.$store.commit('player/SET_TRACK', this.data)
       }
     }

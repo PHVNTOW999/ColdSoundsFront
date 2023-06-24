@@ -183,11 +183,9 @@ export default {
     },
     showCheckProg() {
       this.isShowCheckTime = true
-      console.log('y')
     },
     hiddenCheckProg() {
       this.isShowCheckTime = false
-      console.log('n')
     }
   },
   computed: {

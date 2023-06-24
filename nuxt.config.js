@@ -45,6 +45,14 @@ export default {
     '@nuxtjs/axios'
   ],
 
+  // router: {
+  //   base: '/'
+  // },
+
+  // generate: {
+  //   dir: '/app/'
+  // },
+
   axios: {
     proxy: true
   },
@@ -60,6 +68,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // publicPath: '/app/',
     postcss: {
       postcssOptions: {
         plugins: {

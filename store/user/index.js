@@ -18,15 +18,15 @@ export const getters = {
 }
 
 export const mutations = {
-  CHECK_LS_AUTH(state) {
-    const lsUser = localStorage.getItem('user')
+  CHECK_LS_AUTH(state, payload) {
+    // const lsUser = JSON.parse(localStorage.getItem('user'))
 
-    if(lsUser) {
-      state.user = lsUser
+    if(payload) {
+      state.user = payload
       state.isAuth = true
     } else  {
       state.user = null
-      state.isAuth = null
+      state.isAuth = false
     }
 
   },

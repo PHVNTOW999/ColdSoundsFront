@@ -1,5 +1,5 @@
 <template>
-  <div class="player">
+  <div class="player" tabindex="-1">
 
     <div>
       <div class="progress_bar"
@@ -111,7 +111,7 @@ export default {
   data() {
     return {
       play: false,
-      volume: 25,
+      volume: 5,
       loop: false,
       isShowCheckTime: false,
       checkingTime: null,
@@ -208,7 +208,7 @@ export default {
   },
   mounted() {
     // default volume
-    this.$refs.audio.volume = 0.20
+    this.$refs.audio.volume = 0.05
     // events
     this.$refs.audio.load()
     this.$refs.audio.addEventListener('timeupdate', this.trackProgress)

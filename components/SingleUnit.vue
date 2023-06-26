@@ -1,12 +1,13 @@
 <template>
   <div class="audioUnit">
-
+<!--    <Player />-->
   </div>
 </template>
 
 <script>
 export default {
-  name: "AudioUnit"
+  name: "AudioUnit",
+  props: { data: Object },
 }
 </script>
 

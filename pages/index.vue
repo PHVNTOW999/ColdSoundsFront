@@ -16,8 +16,8 @@ export default {
     Home,
     Header,
   },
-  created() {
-    this.$store.commit('user/CHECK_LS_AUTH')
+  mounted() {
+    this.$store.commit('user/CHECK_LS_AUTH', JSON.parse(localStorage.getItem('user')))
   }
 }
 </script>

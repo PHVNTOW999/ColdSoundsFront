@@ -37,26 +37,31 @@
       <p class="truncate">{{ data.format }} - {{ data.date }}</p>
     </div>
 
-    <b-modal v-model="modalActive" :width="640">
+    <b-modal v-model="modalActive" close-button-aria-label="Close" full-screen>
       <div class="modalWin">
-        <div class="modalWin_cover">
-          <img class="singleCart__cover-img" :src="data.cover || data.album.cover">
+        <div class="modalWin__info">
+          <div class="modalWin__cover">
+            <img class="modalWin__cover-img" :src="data.cover || data.album.cover">
+          </div>
+          <div class="modalWin__name">
+            <h1>{{ data.name }}</h1>
+          </div>
+          <div class="modalWin__artists">
+            <p class="truncate underline">
+              <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
+            </p>
+          </div>
+          <div class="modalWin__feats">
+            <p class="truncate underline" v-if="data.feats.length">
+              <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
+            </p>
+          </div>
+          <div class="modalWin__date">
+            <p class="truncate">{{ data.format }} - {{ data.date }}</p>
+          </div>
         </div>
-        <div class="modalWin__name">
-          <h1>{{ data.name }}</h1>
-        </div>
-        <div class="modalWin__artists">
-          <p class="truncate underline">
-            <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
-          </p>
-        </div>
-        <div class="modalWin__feats">
-          <p class="truncate underline" v-if="data.feats.length">
-            <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
-          </p>
-        </div>
-        <div class="modalWin__date">
-          <p class="truncate">{{ data.format }} - {{ data.date }}</p>
+        <div class="modalWin__audio">
+          <SingleUnit :data="data" />
         </div>
       </div>
     </b-modal>
@@ -85,7 +90,7 @@
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .singleCart {
   width: 200px;
   height: 275px;
@@ -101,5 +106,12 @@
 .singleCart__info {
   padding: 0 5px 0 5px;
   height: 74px;
+}
+.modalWin {
+  background-color: black;
+  &__info {
+    width: 200px;
+    max-width: 200px;
+  }
 }
 </style>

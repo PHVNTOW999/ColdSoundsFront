@@ -1,6 +1,25 @@
 <template>
-  <div class="audioUnit">
-<!--    <Player />-->
+  <div class="audioUnit flex justify-between">
+    <div class="audioUnit__play">
+      <img :src="data.cover" alt="">
+    </div>
+    <div class="audioUnit__name">
+      {{ data.name }}
+    </div>
+    <div class="audioUnit__artists">
+      <p class="truncate underline">
+        <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
+      </p>
+    </div>
+    <div class="audioUnit__feats">
+      <p class="truncate underline" v-if="data.feats.length">
+        <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
+      </p>
+    </div>
+    <div class="audioUnit__func"></div>
+    <div class="audioUnit__time">
+      <p class="truncate">{{ data.format }} - {{ data.date }}</p>
+    </div>
   </div>
 </template>
 
@@ -12,5 +31,12 @@ export default {
 </script>
 
 <style scoped>
-
+.audioUnit {
+  width: 100%;
+  height: 50px;
+  .audioUnit__play {
+    width: 50px;
+    height: 50px;
+  }
+}
 </style>

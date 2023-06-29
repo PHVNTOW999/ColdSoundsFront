@@ -47,16 +47,19 @@
             <h1>{{ data.name }}</h1>
           </div>
           <div class="modalWin__artists">
+            <h1>Artists: </h1>
             <p class="truncate underline">
               <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
             </p>
           </div>
           <div class="modalWin__feats">
+            <h1>Feats: </h1>
             <p class="truncate underline" v-if="data.feats.length">
               <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
             </p>
           </div>
           <div class="modalWin__date">
+            <h1>Release date: </h1>
             <p class="truncate">{{ data.format }} - {{ data.date }}</p>
           </div>
         </div>
@@ -71,9 +74,12 @@
 
 <script>
 
+  import SingleUnit from "~/components/SingleUnit.vue";
+
   export default {
     name: "SingleCart",
     props: { data: Object },
+    components: { SingleUnit },
     data() {
       return {
         modalActive: false,
@@ -90,7 +96,7 @@
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .singleCart {
   width: 200px;
   height: 275px;
@@ -109,9 +115,14 @@
 }
 .modalWin {
   background-color: black;
-  &__info {
-    width: 200px;
-    max-width: 200px;
+  .modalWin__info {
+    height: 516px;
+    .modalWin__cover {
+      max-width: 200px;
+      max-height: 200px;
+      width: 200px;
+      height: 200px;
+    }
   }
 }
 </style>

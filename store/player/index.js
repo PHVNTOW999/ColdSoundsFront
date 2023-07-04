@@ -4,7 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export const state = () => ({
-  env: null,
+  play: false,
+  env: {
+    "uuid": "",
+  },
   track: {
     "uuid": "",
     "format": "",
@@ -21,6 +24,9 @@ export const state = () => ({
 })
 
 export const getters = {
+  PLAY(state) {
+    return state.play
+  },
   ENV(state) {
     return state.env
   },
@@ -30,6 +36,9 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_PLAY(state, payload) {
+    state.play = payload
+  },
   SET_ENV(state, payload) {
     state.env = payload
   },

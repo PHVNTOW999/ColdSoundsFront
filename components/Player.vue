@@ -1,6 +1,5 @@
 <template>
   <div class="player" tabindex="-1">
-
     <div>
       <div class="progress_bar"
            ref="progress_bar"
@@ -21,7 +20,7 @@
     <div class="wrapper flex justify-between">
 
       <div class="meta w-1/3">
-        <div v-if="env">
+        <div v-if="this.env.format === 'Album'">
           <div class="cover w-20">
             <img :src="env.cover">
           </div>
@@ -50,11 +49,11 @@
           <b-button
             type="is-dark"
             @click="$store.commit('player/SET_PERV_TRACK')"
-            :disabled="!this.env">
+            :disabled="!this.env.files">
             <
           </b-button>
         </div>
-        <div class="play" v-if="play == false">
+        <div class="play" v-if="this.play === false">
           <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.file">
             Play
           </b-button>
@@ -68,7 +67,7 @@
           <b-button
             type="is-dark"
             @click="$store.commit('player/SET_NEXT_TRACK')"
-            :disabled="!this.env">
+            :disabled="!this.env.files">
             >
           </b-button>
         </div>
@@ -110,7 +109,7 @@ export default {
   name: "Player",
   data() {
     return {
-      play: false,
+      // play: false,
       volume: 5,
       loop: false,
       isShowCheckTime: false,
@@ -123,12 +122,14 @@ export default {
   },
   methods: {
     playTrack() {
-      if(this.track.file && this.play == false) {
+      if(this.track.file && this.play === false) {
         this.$refs.audio.play()
-        this.play = true
-      } else if(this.track.file && this.play == true) {
+        // this.play = true
+        this.$store.commit('player/SET_PLAY', true)
+      } else if(this.track.file && this.play === true) {
         this.$refs.audio.pause()
-        this.play = false
+        // this.play = false
+        this.$store.commit('player/SET_PLAY', false)
       } else {
         const notif = this.$buefy.notification.open({
           duration: 5000,
@@ -141,7 +142,7 @@ export default {
     },
     setVolume() {
       if(this.volume < 10) this.$refs.audio.volume = `0.0${this.volume}`
-      else if (this.volume == 100) this.$refs.audio.volume = 1
+      else if (this.volume === 100) this.$refs.audio.volume = 1
       else this.$refs.audio.volume = `0.${this.volume}`
     },
     loopTrack() {
@@ -189,6 +190,9 @@ export default {
     }
   },
   computed: {
+    play() {
+      return this.$store.getters["player/PLAY"]
+    },
     env() {
       return this.$store.getters["player/ENV"]
     },
@@ -197,13 +201,18 @@ export default {
     },
   },
   watch: {
+    play() {
+      if(this.play === false) this.$refs.audio.pause();
+      else this.$refs.audio.play();
+    },
     volume() {
       return this.setVolume()
     },
     track() {
       this.$refs.audio.load()
       this.$refs.audio.play();
-      this.play = true
+
+      this.$store.commit('player/SET_PLAY', true)
     }
   },
   mounted() {

@@ -6,6 +6,13 @@
         <div class="w-full flex flex-col items-center">
           <div class="play_btn" @click="play()">
             <b-icon
+              v-if="this.$store.state.player.env.uuid === this.data.uuid && this.$store.state.player.play"
+              icon="pause"
+              size="is-large"
+              type="is-primary">
+            </b-icon>
+            <b-icon
+              v-else
               icon="play"
               size="is-large"
               type="is-primary">
@@ -87,10 +94,20 @@
     },
     methods: {
       play() {
-        this.$store.commit('player/SET_ENV', null)
-        this.$store.commit('player/SET_TRACK', null)
+        if(this.$store.state.player.env.uuid === this.data.uuid) {
+          // stop or play
+          if(this.$store.state.player.play) this.$store.commit("player/SET_PLAY", false)
+          else this.$store.commit("player/SET_PLAY", true)
+        } else {
+          // reload
+          this.$store.commit('player/SET_ENV', null)
+          this.$store.commit('player/SET_TRACK', null)
 
-        this.$store.commit('player/SET_TRACK', this.data)
+          // push
+          this.$store.commit('player/SET_ENV', this.data)
+          this.$store.commit('player/SET_TRACK', this.data)
+          this.$store.commit("player/SET_PLAY", true)
+        }
       }
     }
 }

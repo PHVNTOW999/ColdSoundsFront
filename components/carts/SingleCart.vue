@@ -36,7 +36,7 @@
           {{ data.name }}
       </p>
       <p class="truncate underline">
-        <span v-for="artist in data.artists" :key="artist.slug_id">{{ artist.name }}</span>
+        <router-link :to="`/artist/${artist.uuid}`" v-for="artist in data.artists" :key="artist.uuid">{{ artist.name }}</router-link>
       </p>
       <p class="truncate underline" v-if="data.feats.length">
         <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>

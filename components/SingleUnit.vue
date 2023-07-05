@@ -1,7 +1,7 @@
 <template>
   <div class="audioUnit flex justify-between">
     <div class="audioUnit__play">
-      <img :src="data.cover" @click="play()">
+      <img :src="data.cover || data.album.cover" @click="play()">
     </div>
     <div class="audioUnit__name">
       {{ data.name }}
@@ -32,6 +32,7 @@ export default {
       this.$store.commit('player/SET_ENV', null)
       this.$store.commit('player/SET_TRACK', null)
 
+      this.$store.commit('player/SET_ENV', this.data)
       this.$store.commit('player/SET_TRACK', this.data)
     }
   }

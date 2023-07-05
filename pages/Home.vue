@@ -23,13 +23,13 @@ export default {
   components: {AlbumCart, SingleCart},
   computed: {
     ...mapGetters({
-      SINGLES: "pages/SINGLES",
-      ALBUMS: 'pages/ALBUMS'
+      SINGLES: "main/SINGLES",
+      ALBUMS: 'main/ALBUMS'
     }),
   },
   created() {
-    this.$store.dispatch('pages/GET_SINGLES')
-    this.$store.dispatch('pages/GET_ALBUMS')
+    this.$store.dispatch('main/GET_SINGLES')
+    this.$store.dispatch('main/GET_ALBUMS')
   }
 }
 </script>

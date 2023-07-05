@@ -1,6 +1,7 @@
 export const state = {
   singles: [],
   albums: []
+  // artist: []
 }
 
 export const getters = {
@@ -19,6 +20,7 @@ export const mutations = {
   SET_ALBUMS(state, payload) {
     state.albums = payload
   }
+  // SET_ARTIST()
 }
 
 export const actions = {
@@ -38,4 +40,12 @@ export const actions = {
       }).catch((error) => { rej(console.log(error)) })
     })
   }
+  // GET_ARTIST({ commit }, payload) {
+  //   return new Promise((res, rej) => {
+  //     this.$axios.$get(`api/artist/${payload}`).then((data) => {
+  //       commit('SET_ARTIST', data)
+  //       res(data)
+  //     }).catch((error) => { rej(console.log(error)) })
+  //   })
+  // },
 }

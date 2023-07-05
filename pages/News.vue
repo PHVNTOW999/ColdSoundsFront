@@ -5,7 +5,7 @@
 <!--      <singleCart v-for="(single, i) in news"-->
 <!--                  :data="single"-->
 <!--                  :key="i" />-->
-      {{ this.$store.getters["pages/test"] }}
+      {{ this.$store.getters["main/test"] }}
     </div>
   </div>
 </template>
@@ -18,13 +18,13 @@ export default {
   computed: {
     ...mapGetters({
       // map `this.doneCount` to `this.$store.getters.doneTodosCount`
-      doneCount: 'pages/test'
+      doneCount: 'main/test'
     })
   },
   methods: {
     ...mapActions(
       {
-        GET_SINGLES:'pages/GET_SINGLES',
+        GET_SINGLES:'main/GET_SINGLES',
       }
     ),
   },

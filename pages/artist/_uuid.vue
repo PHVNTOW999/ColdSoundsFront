@@ -1,14 +1,12 @@
 <template>
   <div>
-    <Header />
-      <span>{{ this.artist.name }}</span>
-    <Player />
+    <span>{{ this.artist.name }}</span>
   </div>
 </template>
 
 <script>
-import Header from "~/components/Header.vue";
-import Player from "~/components/Player.vue";
+import Header from "~/components/TheHeader.vue";
+import Player from "~/components/ThePlayer.vue";
 
 export default {
   name: "uuid",

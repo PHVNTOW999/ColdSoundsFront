@@ -192,18 +192,13 @@ export default {
         {
           id: 0,
           name: 'Home',
-          path: '/'
+          path: '/Home'
         },
         {
           id: 1,
           name: 'News',
           path: '/News'
         },
-        {
-          id: 2,
-          name: 'single page',
-          path: '/Single'
-        }
       ]
     }
   },

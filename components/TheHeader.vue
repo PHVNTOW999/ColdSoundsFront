@@ -12,11 +12,22 @@
         {{ link.name }}
       </router-link>
 
-      <!--random link-->
-      <router-link
-        class="underline hover:text-indigo-600"
-        to="/News">Random
-      </router-link>
+      <!--playlists section-->
+      <div class="playlists" v-if="isAuth && playlists">
+        <b-dropdown aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+              label="Click me!"
+              type="is-primary"
+              :icon-right="active ? 'menu-up' : 'menu-down'" />
+          </template>
+
+
+          <b-dropdown-item aria-role="listitem" v-for="(playlist, i) in playlists" :key="i">
+            {{ playlist.name }}
+          </b-dropdown-item>
+        </b-dropdown>
+      </div>
 
     </nav>
 
@@ -224,6 +235,9 @@ export default {
     },
     user() {
       return this.$store.getters["user/USER"]
+    },
+    playlists() {
+      return this.$store.getters["user/PLAYLISTS"]
     }
   }
 }

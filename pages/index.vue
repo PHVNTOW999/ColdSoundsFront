@@ -20,6 +20,9 @@ export default {
   },
   mounted() {
     this.$store.commit('user/CHECK_LS_AUTH', JSON.parse(localStorage.getItem('user')))
+    setTimeout(() => {
+      this.$store.dispatch('user/GET_PLAYLISTS', this.$store.state.user.email)
+    }, 500)
   }
 }
 </script>

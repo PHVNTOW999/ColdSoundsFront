@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export const state = {
   isAuth: false,
   user: null,
+  playlists: null
 }
 
 export const getters = {
@@ -14,13 +15,14 @@ export const getters = {
   },
   USER(state) {
     return state.user
+  },
+  PLAYLISTS(state) {
+    return state.playlists
   }
 }
 
 export const mutations = {
   CHECK_LS_AUTH(state, payload) {
-    // const lsUser = JSON.parse(localStorage.getItem('user'))
-
     if(payload) {
       state.user = payload
       state.isAuth = true
@@ -28,13 +30,15 @@ export const mutations = {
       state.user = null
       state.isAuth = false
     }
-
   },
   SET_USER(state, payload) {
     state.user = payload
     state.isAuth = true
 
     localStorage.setItem('user', JSON.stringify(payload))
+  },
+  SET_PLAYLISTS(state, payload) {
+    state.playlists = payload
   },
 }
 
@@ -50,6 +54,14 @@ export const actions = {
   REG({ commit }, payload) {
     return new Promise((res, rej) => {
       this.$axios.$post('api/auth/reg/', payload).then((data) => {
+        res(data)
+      }).catch((error) => { rej(console.log(error)) })
+    })
+  },
+  GET_PLAYLISTS({ commit, state }) {
+    return new Promise((res, rej) => {
+      this.$axios.$get(`api/userplaylist/${state.user.email}/`).then((data) => {
+        commit('SET_PLAYLISTS', data)
         res(data)
       }).catch((error) => { rej(console.log(error)) })
     })

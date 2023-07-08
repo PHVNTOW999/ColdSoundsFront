@@ -1,8 +1,8 @@
 <template>
-  <div class="singleCart rounded-lg">
+  <div class="songCart rounded-lg">
 
-    <div class="singleCart__cover flex items-center">
-      <div class="singleCart__cover-icons absolute">
+    <div class="songCart__cover flex items-center">
+      <div class="songCart__cover-icons absolute">
         <div class="w-full flex flex-col items-center">
           <div class="play_btn" @click="play()">
             <b-icon
@@ -28,10 +28,10 @@
           </div>
         </div>
       </div>
-      <img class="singleCart__cover-img" :src="data.cover || data.album.cover">
+      <img class="songCart__cover-img" :src="data.cover || data.album.cover">
     </div>
 
-    <div class="singleCart__info text-center">
+    <div class="songCart__info text-center">
       <p class="truncate underline" @click="modalActive = true">
           {{ data.name }}
       </p>
@@ -84,7 +84,7 @@
   import SingleUnit from "~/components/SingleUnit.vue";
 
   export default {
-    name: "SingleCart",
+    name: "SongCart",
     props: { data: Object },
     components: { SingleUnit },
     data() {
@@ -105,7 +105,8 @@
 
           // push
           this.$store.commit('player/SET_ENV', this.data)
-          this.$store.commit('player/SET_TRACK', this.data)
+          if(this.data.format === 'Single') this.$store.commit('player/SET_TRACK', this.data)
+          else this.$store.commit('player/SET_TRACK', this.data.files[0])
           this.$store.commit("player/SET_PLAY", true)
         }
       }
@@ -114,19 +115,19 @@
 </script>
 
 <style scoped>
-.singleCart {
+.songCart {
   width: 200px;
   height: 275px;
   color: #fff;
   background-color: #000;
 }
-.singleCart__cover-icons {
+.songCart__cover-icons {
   width: 200px;
 }
-.singleCart__cover-img {
+.songCart__cover-img {
   border-radius: 0.5rem 0.5rem 0 0;
 }
-.singleCart__info {
+.songCart__info {
   padding: 0 5px 0 5px;
   height: 74px;
 }

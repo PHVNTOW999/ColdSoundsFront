@@ -209,6 +209,7 @@ export default {
       return this.setVolume()
     },
     track() {
+      this.$refs.audio.currentTime = 0
       this.$refs.audio.load()
       this.$refs.audio.play();
 

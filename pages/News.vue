@@ -2,9 +2,6 @@
   <div>
     news page
     <div class="flex justify-between w-100">
-<!--      <singleCart v-for="(single, i) in news"-->
-<!--                  :data="single"-->
-<!--                  :key="i" />-->
       {{ this.$store.getters["main/test"] }}
     </div>
   </div>

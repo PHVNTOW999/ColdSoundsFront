@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="flex justify-between w-100">
-      <singleCart v-for="(single, i) in SINGLES"
+      <SongCart v-for="(single, i) in SINGLES"
                   :data="single"
                   :key="i" />
     </div>
     <div class="flex justify-between w-100">
-      <albumCart v-for="(album, i) in ALBUMS"
+      <SongCart v-for="(album, i) in ALBUMS"
                   :data="album"
                   :key="i" />
     </div>
@@ -14,13 +14,12 @@
 </template>
 
 <script>
-import SingleCart from "~/components/carts/SingleCart.vue";
+import SongCart from "~/components/carts/SongCart.vue";
 import {mapGetters} from "vuex";
-import AlbumCart from "~/components/carts/AlbumCart.vue";
 
 export default {
   name: "Home",
-  components: {AlbumCart, SingleCart},
+  components: { SongCart },
   computed: {
     ...mapGetters({
       SINGLES: "main/SINGLES",

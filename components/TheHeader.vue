@@ -17,7 +17,7 @@
         <b-dropdown aria-role="list">
           <template #trigger="{ active }">
             <b-button
-              label="Click me!"
+              label="Your Playlists"
               type="is-primary"
               :icon-right="active ? 'menu-up' : 'menu-down'" />
           </template>
@@ -168,15 +168,27 @@
     </div>
 
     <div class="user" v-else>
-      <b-menu>
-        <b-menu-list>
-          <b-menu-item icon="account" :label="user.email">
-            <b-menu-item :label="`Reg date: ${ user.reg_date }`" />
-            <b-menu-item label="Change password" />
-            <b-menu-item label="Exit" />
-          </b-menu-item>
-        </b-menu-list>
-      </b-menu>
+      <b-dropdown aria-role="list">
+        <template #trigger="{ active }">
+          <b-button
+            :label="user.email"
+            type="is-primary"
+            :icon-right="active ? 'menu-up' : 'menu-down'" />
+        </template>
+
+        <b-dropdown-item aria-role="listitem">Change Pass</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">Exit</b-dropdown-item>
+
+      </b-dropdown>
+<!--      <b-menu>-->
+<!--        <b-menu-list>-->
+<!--          <b-menu-item icon="account" :label="user.email">-->
+<!--            <b-menu-item :label="`Reg date: ${ user.reg_date }`" />-->
+<!--            <b-menu-item label="Change password" />-->
+<!--            <b-menu-item label="Exit" />-->
+<!--          </b-menu-item>-->
+<!--        </b-menu-list>-->
+<!--      </b-menu>-->
     </div>
 
   </div>

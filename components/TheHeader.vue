@@ -23,10 +23,13 @@
           </template>
 
 
-          <b-dropdown-item aria-role="listitem" v-for="(playlist, i) in playlists" :key="i">
+          <b-dropdown-item aria-role="listitem" v-for="(playlist, i) in playlists" :key="i" @click="modalData = playlist; modalActive = true">
             {{ playlist.name }}
+            <ModalSongCart :data="modalData" :modalActive="modalActive" @close="modalActive = false" />
           </b-dropdown-item>
+
         </b-dropdown>
+<!--        <ModalSongCart :data="modalData" :modalActive="modalActive" @close="modalActive = false" />-->
       </div>
 
     </nav>
@@ -196,10 +199,15 @@
 
 <script>
 
+import ModalSongCart from "~/components/carts/ModalSongCart.vue";
+
 export default {
   name: "Header",
+  components: {ModalSongCart},
   data() {
     return {
+      modalData: null,
+      modalActive: false,
       isLogActive: false,
       isRegActive: false,
       logForm: {

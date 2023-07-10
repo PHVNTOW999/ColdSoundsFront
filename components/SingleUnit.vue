@@ -1,6 +1,6 @@
 <template>
   <div class="audioUnit flex justify-between">
-    <div class="audioUnit__play">
+    <div class="audioUnit__play" v-if="data.cover || data.album.cover">
       <img :src="data.cover || data.album.cover" @click="play()">
     </div>
     <div class="audioUnit__name">

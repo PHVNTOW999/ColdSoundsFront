@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export const state = {
   isAuth: false,
   user: null,
-  playlists: null
+  playlists: Object
 }
 
 export const getters = {

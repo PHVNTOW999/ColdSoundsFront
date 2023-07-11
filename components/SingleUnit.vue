@@ -12,7 +12,7 @@
       </p>
     </div>
     <div class="audioUnit__feats">
-      <p class="truncate underline" v-if="data.feats.length">
+      <p class="truncate underline" v-if="data.feats">
         <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
       </p>
     </div>

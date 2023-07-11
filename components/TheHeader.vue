@@ -25,11 +25,11 @@
 
           <b-dropdown-item aria-role="listitem" v-for="(playlist, i) in playlists" :key="i" @click="modalData = playlist; modalActive = true">
             {{ playlist.name }}
-            <ModalSongCart :data="modalData" :modalActive="modalActive" @close="modalActive = false" />
+<!--            <ModalSongCart v-if="modalData" :data="modalData" :modalActive="modalActive" @close="modalActive = false" />-->
           </b-dropdown-item>
 
         </b-dropdown>
-<!--        <ModalSongCart :data="modalData" :modalActive="modalActive" @close="modalActive = false" />-->
+        <ModalSongCart v-if="modalData" :data="modalData" :modalActive="modalActive" @close="modalActive = false" />
       </div>
 
     </nav>

@@ -21,7 +21,7 @@
         </div>
         <div class="modalWin__feats">
           <h1>Feats: </h1>
-          <p class="truncate underline" v-if="data.feats.length">
+          <p class="truncate underline" v-if="data.feats">
             <span v-for="feat in data.feats" :key="feat.slug_id">{{ feat.name }}</span>
           </p>
         </div>
@@ -34,7 +34,6 @@
         <SingleUnit :data="data" />
       </div>
     </div>
-    <button @click="$emit('close')">Exit</button>
   </b-modal>
 </template>
 

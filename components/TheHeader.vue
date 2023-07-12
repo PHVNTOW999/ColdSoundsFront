@@ -23,9 +23,47 @@
           </template>
 
 
-          <b-dropdown-item aria-role="listitem" v-for="(playlist, i) in playlists" :key="i" @click="modalData = playlist; modalActive = true">
-            {{ playlist.name }}
-<!--            <ModalSongCart v-if="modalData" :data="modalData" :modalActive="modalActive" @close="modalActive = false" />-->
+          <b-dropdown-item class="playlists flex justify-between" aria-role="listitem" v-for="(playlist, i) in playlists" :key="i">
+              <h1 @click="modalData = playlist; modalActive = true">{{ playlist.name }}</h1>
+              <div class="modalWin__change-edit"
+                   v-if="playlist.user.email == user.email && playlist.user.id == user.id"
+                   @click="editModalActive = true">
+
+                <b-icon
+                  icon="square-edit-outline"
+                  type="is-warning"
+                  size="is-medium" />
+
+                <b-modal v-model="editModalActive"
+                         has-modal-card
+                         trap-focus
+                         :destroy-on-hide="false"
+                         aria-role="dialog"
+                         aria-label="Example Modal"
+                         close-button-aria-label="Close"
+                         aria-modal>
+                  <div class="editModal">
+<!--                    <h1>Playlist name: {{ playlist.name }}</h1>-->
+                    <div class="editModal__name">
+                      <b-field label="Password">
+                        <b-input
+                          type="password"
+                          :value="editForm.name"
+                          password-reveal
+                          placeholder="Write playlist's name"
+                          required>
+                        </b-input>
+                      </b-field>
+                    </div>
+                  </div>
+                </b-modal>
+              </div>
+              <div class="modalWin__change-del">
+                <b-icon
+                  icon="close"
+                  type="is-danger"
+                  size="is-medium" />
+              </div>
           </b-dropdown-item>
 
         </b-dropdown>
@@ -208,6 +246,9 @@ export default {
     return {
       modalData: null,
       modalActive: false,
+      editModalActive: false,
+      delModalActive: false,
+      editForm: {},
       isLogActive: false,
       isRegActive: false,
       logForm: {

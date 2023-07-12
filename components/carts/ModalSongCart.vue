@@ -1,10 +1,11 @@
 <template>
   <b-modal v-model="modalActive" :can-cancel="false" full-screen>
     <div class="modalWin">
-      <div class="close-btn" @click="$emit('close')">
+      <div class="modalWin__close" @click="$emit('close')">
         <b-icon
           icon="close"
           size="is-large" />
+      </div>
       </div>
       <div class="modalWin__info">
         <div class="modalWin__cover">
@@ -30,8 +31,11 @@
           <p class="truncate">{{ data.format }} - {{ data.date }}</p>
         </div>
       </div>
-      <div class="modalWin__audio">
-        <SingleUnit :data="data" />
+      <div class="modalWin__singles">
+        <div class="singles__single">
+          <SingleUnit v-if="data.format == 'Single'" :data="data" />
+          <SingleUnit v-else v-for="(file, i) in data.files" :key="i" :data="file" />
+        </div>
       </div>
     </div>
   </b-modal>

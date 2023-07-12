@@ -49,17 +49,17 @@
           <b-button
             type="is-dark"
             @click="$store.commit('player/SET_PERV_TRACK')"
-            :disabled="!this.env.files">
+            :disabled="this.env.format == 'Single'">
             <
           </b-button>
         </div>
         <div class="play" v-if="this.play === false">
-          <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.file">
+          <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.files">
             Play
           </b-button>
         </div>
         <div class="pause" v-else>
-          <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.file">
+          <b-button type="is-dark" @click="playTrack()" :disabled="!this.track.files">
             Pause
           </b-button>
         </div>
@@ -67,7 +67,7 @@
           <b-button
             type="is-dark"
             @click="$store.commit('player/SET_NEXT_TRACK')"
-            :disabled="!this.env.files">
+            :disabled="!this.env.format == 'Single'">
             >
           </b-button>
         </div>
@@ -84,8 +84,7 @@
         </div>
         <div class="volume">
           <b-field label="Volume">
-            <b-slider  size="is-small" v-model="volume">
-            </b-slider>
+            <b-slider size="is-small" v-model="volume" />
           </b-field>
         </div>
         <button @click="loopTrack()">Loop</button>
@@ -96,8 +95,8 @@
     </div>
 
     <audio ref="audio">
-      <source :src="track.file" type='audio/wav' />
-      <source :src="track.file" type='audio/mp3' />
+      <source :src="track.files" type='audio/wav' />
+      <source :src="track.files" type='audio/mp3' />
     </audio>
 
   </div>
@@ -122,11 +121,11 @@ export default {
   },
   methods: {
     playTrack() {
-      if(this.track.file && this.play === false) {
+      if(this.track.files && this.play === false) {
         this.$refs.audio.play()
         // this.play = true
         this.$store.commit('player/SET_PLAY', true)
-      } else if(this.track.file && this.play === true) {
+      } else if(this.track.files && this.play === true) {
         this.$refs.audio.pause()
         // this.play = false
         this.$store.commit('player/SET_PLAY', false)

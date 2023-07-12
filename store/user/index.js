@@ -60,7 +60,7 @@ export const actions = {
   },
   GET_PLAYLISTS({ commit, state }) {
     return new Promise((res, rej) => {
-      this.$axios.$get(`api/userplaylist/${state.user.email}/`).then((data) => {
+      this.$axios.$get(`api/user-playlist/${state.user.email}/`).then((data) => {
         commit('SET_PLAYLISTS', data)
         res(data)
       }).catch((error) => { rej(console.log(error)) })

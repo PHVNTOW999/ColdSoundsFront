@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Header from "~/components/TheHeader.vue";
+import Header from "~/components/Header/TheHeader.vue";
 import Player from "~/components/ThePlayer.vue";
 
 export default {

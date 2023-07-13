@@ -54,14 +54,14 @@ export default {
 <style scoped>
 .modalWin {
   background-color: black;
-  .modalWin__info {
-    height: 516px;
-    .modalWin__cover {
-      max-width: 200px;
-      max-height: 200px;
-      width: 200px;
-      height: 200px;
-    }
-  }
+}
+.modalWin__info {
+  height: 516px;
+}
+.modalWin__cover {
+  max-width: 200px;
+  max-height: 200px;
+  width: 200px;
+  height: 200px;
 }
 </style>

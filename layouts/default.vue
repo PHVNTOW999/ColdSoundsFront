@@ -7,8 +7,7 @@
 </template>
 
 <script>
-import Home from "~/pages/Home.vue";
-import TheHeader from "~/components/TheHeader.vue";
+import TheHeader from "~/components/Header/TheHeader.vue";
 import ThePlayer from "~/components/ThePlayer.vue";
 
 export default {

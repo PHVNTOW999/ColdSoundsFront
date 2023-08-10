@@ -20,6 +20,10 @@
     <div class="audioUnit__time">
       <p class="truncate">{{ data.format }} - {{ data.date }}</p>
     </div>
+<!--    <audio ref="unit_audio">-->
+<!--      <source :src="data.files" type='audio/wav' />-->
+<!--      <source :src="data.files" type='audio/mp3' />-->
+<!--    </audio>-->
   </div>
 </template>
 
@@ -28,6 +32,9 @@ export default {
   name: "AudioUnit",
   props: { data: Object },
   methods: {
+    // diraction() {
+    //   return this.$refs.unit_audio
+    // },
     play() {
       this.$store.commit('player/SET_ENV', null)
       this.$store.commit('player/SET_TRACK', null)

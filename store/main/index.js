@@ -37,7 +37,10 @@ export const actions = {
       this.$axios.$get('api/albums/').then((data) => {
         commit('SET_ALBUMS', data)
         res(data)
-      }).catch((error) => { rej(console.log(error)) })
+      }).catch((error) => {
+        // при ошибке тут eventBus!!!
+        rej(console.log(error))
+      })
     })
   }
   // GET_ARTIST({ commit }, payload) {

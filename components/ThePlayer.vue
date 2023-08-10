@@ -49,7 +49,7 @@
           <b-button
             type="is-dark"
             @click="$store.commit('player/SET_PERV_TRACK')"
-            :disabled="this.env.format == 'Single'">
+            :disabled="this.env.format == undefined || this.env.format == 'Single'">
             <
           </b-button>
         </div>
@@ -67,7 +67,7 @@
           <b-button
             type="is-dark"
             @click="$store.commit('player/SET_NEXT_TRACK')"
-            :disabled="!this.env.format == 'Single'">
+            :disabled="this.env.format == undefined || this.env.format == 'Single'">
             >
           </b-button>
         </div>

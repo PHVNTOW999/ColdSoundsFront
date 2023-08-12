@@ -1,22 +1,16 @@
 <template>
   <div>
-<!--      <TheHeader />-->
       <Home />
-<!--      <ThePlayer />-->
   </div>
 </template>
 
 <script>
 import Home from "~/pages/Home.vue";
-import TheHeader from "~/components/Header/TheHeader.vue";
-import ThePlayer from "~/components/ThePlayer.vue";
 
 export default {
   name: 'IndexPage',
   components: {
     Home,
-    TheHeader,
-    ThePlayer
   },
   mounted() {
     this.$store.commit('user/CHECK_LS_AUTH', JSON.parse(localStorage.getItem('user')))

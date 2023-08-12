@@ -1,13 +1,13 @@
 <template>
   <div class="editor">
-    <b-modal v-model="activeModal"
-             has-modal-card
-             trap-focus
-             :destroy-on-hide="false"
-             aria-role="dialog"
-             aria-label="Example Modal"
-             close-button-aria-label="Close"
+    <b-modal v-model="editModal"
+             :can-cancel="false"
              aria-modal >
+      <div class="modalWin__close" @click="$emit('close')">
+        <b-icon
+          icon="close"
+          size="is-large" />
+      </div>
       <div class="editModal">
         <h1>Playlist name: {{ data.name }}</h1>
         <div class="editModal__name">
@@ -23,23 +23,17 @@
       </div>
     </b-modal>
 
-    <div class="editor__btn" @click="activeModal = true">
-      <b-icon
-        icon="square-edit-outline"
-        type="is-warning"
-        size="is-medium" />
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Editor",
-  props: {data: Object},
+  props: {data: Object, editModal: Boolean},
   data() {
     return {
       form: {},
-      activeModal: false
+      // activeModal: false
     }
   }
 }

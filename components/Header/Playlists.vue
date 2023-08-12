@@ -13,10 +13,16 @@
                        v-for="(playlist, i) in playlists" :key="i">
         <h1 @click="data = playlist; modalActive = true">{{ playlist.name }}</h1>
         <div class="modalWin__change-edit"
-             v-if="playlist.user.email === user.email && playlist.user.id === user.id">
+             v-if="playlist.user.email === user.email && playlist.user.id === user.id"
+             @click="data = playlist; editModal = true">
 
-          <Editor v-if="playlist"
-                  :data="playlist" />
+          <b-icon
+            icon="square-edit-outline"
+            type="is-warning"
+            size="is-medium" />
+
+<!--          <Editor v-if="playlist"-->
+<!--                  :data="playlist" />-->
         </div>
         <div class="modalWin__change-del">
           <b-icon
@@ -32,6 +38,12 @@
                    :data="data"
                    :modalActive="modalActive"
                    @close="modalActive = false" />
+
+    <Editor v-if="data"
+            :data="data"
+            :editModal="editModal"
+            @close="editModal = false"/>
+
   </div>
 </template>
 
@@ -45,6 +57,7 @@ export default {
     return {
       data: null,
       modalActive: false,
+      editModal: false,
       // delModalActive: false,
     }
   },

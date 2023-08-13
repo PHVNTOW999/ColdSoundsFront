@@ -48,14 +48,14 @@ export const actions = {
       this.$axios.$post('api/auth/log/', payload).then((data) => {
         commit('SET_USER', data)
         res(data)
-      }).catch((error) => { rej(console.log(error)) })
+      }).catch((error) => { rej(console.error(error)) })
     })
   },
   REG({ commit }, payload) {
     return new Promise((res, rej) => {
       this.$axios.$post('api/auth/reg/', payload).then((data) => {
         res(data)
-      }).catch((error) => { rej(console.log(error)) })
+      }).catch((error) => { rej(console.error(error)) })
     })
   },
   GET_PLAYLISTS({ commit, state }) {
@@ -63,7 +63,14 @@ export const actions = {
       this.$axios.$get(`api/user-playlist/${state.user.email}/`).then((data) => {
         commit('SET_PLAYLISTS', data)
         res(data)
-      }).catch((error) => { rej(console.log(error)) })
+      }).catch((error) => { rej(console.error(error)) })
+    })
+  },
+  PATCH_PLAYLIST({ commit }, payload) {
+    return new Promise((res, rej) => {
+      this.$axios.$patch(`api/update-playlist/${payload.uuid}/`, payload).then((data) => {
+        res(data)
+      }).catch((error) => { rej(console.error(error)) })
     })
   },
 }

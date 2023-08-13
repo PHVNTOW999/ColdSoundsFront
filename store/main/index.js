@@ -29,7 +29,7 @@ export const actions = {
       this.$axios.$get('api/singles/').then((data) => {
         commit('SET_SINGLES', data)
         res(data)
-      }).catch((error) => { rej(console.log(error)) })
+      }).catch((error) => { rej(console.error(error)) })
     })
   },
   GET_ALBUMS({ commit }) {
@@ -39,7 +39,7 @@ export const actions = {
         res(data)
       }).catch((error) => {
         // при ошибке тут eventBus!!!
-        rej(console.log(error))
+        rej(console.error(error))
       })
     })
   }

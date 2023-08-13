@@ -11,25 +11,21 @@
       <b-dropdown-item class="playlists flex justify-between"
                        aria-role="listitem"
                        v-for="(playlist, i) in playlists" :key="i">
-        <h1 @click="data = playlist; modalActive = true">{{ playlist.name }}</h1>
-        <div class="modalWin__change-edit"
-             v-if="playlist.user.email === user.email && playlist.user.id === user.id"
-             @click="data = playlist; editModal = true">
-
-          <b-icon
-            icon="square-edit-outline"
-            type="is-warning"
-            size="is-medium" />
-
-<!--          <Editor v-if="playlist"-->
-<!--                  :data="playlist" />-->
-        </div>
         <div class="modalWin__change-del">
           <b-icon
             icon="close"
             type="is-danger"
             size="is-medium" />
         </div>
+        <div class="modalWin__change-edit"
+             v-if="playlist.user.email === user.email && playlist.user.id === user.id"
+             @click="data = playlist; editModal = true">
+          <b-icon
+            icon="square-edit-outline"
+            type="is-warning"
+            size="is-medium" />
+        </div>
+        <h1 @click="data = playlist; modalActive = true">{{ playlist.name }}</h1>
       </b-dropdown-item>
 
     </b-dropdown>
@@ -58,7 +54,6 @@ export default {
       data: null,
       modalActive: false,
       editModal: false,
-      // delModalActive: false,
     }
   },
   computed: {

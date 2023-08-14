@@ -73,4 +73,11 @@ export const actions = {
       }).catch((error) => { rej(console.error(error)) })
     })
   },
+  POST_FILE({ commit }, payload) {
+    return new Promise((res, rej) => {
+      this.$axios.$post('api/upload-file/', payload, { headers: {'Content-Type': 'multipart/form-data' }}).then((data) => {
+        res(data)
+      }).catch((error) => { rej(console.error(error)) })
+    })
+  },
 }

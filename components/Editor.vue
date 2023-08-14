@@ -8,15 +8,15 @@
           icon="close"
           size="is-large" />
       </div>
-      <div class="editModalForm">
+      <form method="post" action="/" enctype="multipart/form-data" class="editModalForm">
         <div class="editModalForm__cover">
           <div class="editModalForm__cover-now">
-            <img :src="data.cover" class="max-w-xs">
+            <img :src="form.cover" class="max-w-xs" alt="">
           </div>
           <div class="editModalForm__cover-new">
             <b-field label="Included filename">
               <b-field class="file is-primary" :class="{'has-name': !!newCover}">
-                <b-upload v-model="newCover" class="file-label" rounded>
+                <b-upload :multiple="false" name="file" v-model="newCover" class="file-label" rounded>
                 <span class="file-cta">
                   <b-icon class="file-icon" icon="upload"></b-icon>
                   <span class="file-label">{{ newCover.name || "Click to upload"}}</span>
@@ -39,7 +39,7 @@
         <div class="editModalForm__submit">
           <b-button type="is-success" @click="sendForm()">Done</b-button>
         </div>
-      </div>
+      </form>
     </b-modal>
   </div>
 </template>
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       form: {
+        uuid: null,
         name: null,
         cover: null,
         files: null
@@ -83,9 +84,23 @@ export default {
         loadingComponent.close()
         this.$emit('close')
       }
+    },
+  },
+  watch: {
+    data() {
+      if(this.data.uuid !== this.form.uuid) {
+        this.form.uuid = this.data.uuid
+        this.form.name = this.data.name
+        this.form.cover = this.data.cover
+        this.form.files = this.data.files
+      }
+    },
+    newCover() {
+      console.log(this.newCover)
+      this.$store.dispatch('user/POST_FILE', this.newCover)
     }
   },
-  mounted() {
+  created() {
     this.form.uuid = this.data.uuid
     this.form.name = this.data.name
     this.form.cover = this.data.cover

@@ -15,11 +15,11 @@
           </div>
           <div class="editModalForm__cover-new">
             <b-field label="Included filename">
-              <b-field class="file is-primary" :class="{'has-name': !!newCover}">
-                <b-upload :multiple="false" name="file" v-model="newCover" class="file-label" rounded>
+              <b-field class="file is-primary" :class="{'has-name': !!newForm.cover}">
+                <b-upload :multiple="false" v-model="newForm.cover" name="file" class="file-label" rounded>
                 <span class="file-cta">
                   <b-icon class="file-icon" icon="upload"></b-icon>
-                  <span class="file-label">{{ newCover.name || "Click to upload"}}</span>
+                  <span class="file-label">{{ newForm.cover.name || "Click to upload"}}</span>
                 </span>
                 </b-upload>
               </b-field>
@@ -35,7 +35,18 @@
               required />
           </b-field>
         </div>
-        <div class="editModalForm__files"></div>
+        <div class="editModalForm__files">
+          <div v-for="(file, i) in form.files" :key="i"
+               class="editModalForm__files-file flex"
+               @click="editFiles(file)">
+            <div class="editModalForm__files-file-checkbox">
+              <b-checkbox :value="true" size="is-medium" />
+            </div>
+            <div class="editModalForm__files-file-unit">
+              <SingleUnit :data="file" />
+            </div>
+          </div>
+        </div>
         <div class="editModalForm__submit">
           <b-button type="is-success" @click="sendForm()">Done</b-button>
         </div>
@@ -50,15 +61,15 @@ export default {
   props: {data: Object, editModal: Boolean},
   data() {
     return {
-      form: {
+      form: {},
+      newForm: {
         uuid: null,
         name: null,
-        cover: null,
-        files: null
+        files: null,
+        cover: {
+          name: ""
+        },
       },
-      newCover: {
-        name: null
-      }
     }
   },
   methods: {
@@ -85,26 +96,31 @@ export default {
         this.$emit('close')
       }
     },
+    editFiles(workFile) {
+      // console.log(workFile)
+      this.newForm.files.find((file, i) => {
+        console.log(file.uuid, workFile.uuid)
+        if (file.uuid == workFile.uuid) this.newForm.files.splice(i, 1)
+        else this.newForm.files.push(workFile)
+      })
+      console.log(this.newForm.files)
+    }
   },
   watch: {
     data() {
       if(this.data.uuid !== this.form.uuid) {
-        this.form.uuid = this.data.uuid
-        this.form.name = this.data.name
-        this.form.cover = this.data.cover
-        this.form.files = this.data.files
+        Object.assign(this.form, this.data);
+        Object.assign(this.newForm, this.form);
       }
     },
     newCover() {
-      console.log(this.newCover)
       this.$store.dispatch('user/POST_FILE', this.newCover)
     }
   },
   created() {
-    this.form.uuid = this.data.uuid
-    this.form.name = this.data.name
-    this.form.cover = this.data.cover
-    this.form.files = this.data.files
+    Object.assign(this.form, this.data);
+    Object.assign(this.newForm, this.form);
+    this.newForm.cover = { name: null }
   }
 }
 </script>

@@ -40,7 +40,7 @@
                class="editModalForm__files-file flex"
                @click="editFiles(file)">
             <div class="editModalForm__files-file-checkbox">
-              <b-checkbox :value="true" size="is-medium" />
+              <b-checkbox :value="true" size="is-medium" expanded />
             </div>
             <div class="editModalForm__files-file-unit">
               <SingleUnit :data="file" />
@@ -97,20 +97,28 @@ export default {
       }
     },
     editFiles(workFile) {
-      // console.log(workFile)
-      this.newForm.files.find((file, i) => {
-        console.log(file.uuid, workFile.uuid)
-        if (file.uuid == workFile.uuid) this.newForm.files.splice(i, 1)
-        else this.newForm.files.push(workFile)
-      })
-      console.log(this.newForm.files)
-    }
+      let newMass = JSON.parse(JSON.stringify(this.newForm.files))
+
+      const isActive = this.newForm.files.find(el => el.uuid == workFile.uuid)
+
+      console.log(this.newForm.files.find(el => el.uuid == workFile.uuid))
+
+      // this.newForm.files.forEach((el, i) => {
+      //   if (el.uuid == workFile.uuid) newMass.splice(i, 1)
+      //   else newMass.push(workFile)
+      // })
+
+      // this.newForm.files = newMass
+    },
   },
   watch: {
     data() {
       if(this.data.uuid !== this.form.uuid) {
+        // this.form = JSON.parse(JSON.stringify(this.data))
+        // this.newForm = JSON.parse(JSON.stringify(this.form))
         Object.assign(this.form, this.data);
         Object.assign(this.newForm, this.form);
+        // this.newForm = {...this.form}
       }
     },
     newCover() {

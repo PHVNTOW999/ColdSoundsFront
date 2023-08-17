@@ -97,18 +97,10 @@ export default {
       }
     },
     editFiles(workFile) {
-      let newMass = JSON.parse(JSON.stringify(this.newForm.files))
-
-      const isActive = this.newForm.files.find(el => el.uuid == workFile.uuid)
-
-      console.log(this.newForm.files.find(el => el.uuid == workFile.uuid))
-
-      // this.newForm.files.forEach((el, i) => {
-      //   if (el.uuid == workFile.uuid) newMass.splice(i, 1)
-      //   else newMass.push(workFile)
-      // })
-
-      // this.newForm.files = newMass
+      let newArr = JSON.parse(JSON.stringify(this.newForm.files))
+      newArr.forEach((el, i) => {
+        if (el.uuid !== workFile.uuid) 
+      })
     },
   },
   watch: {

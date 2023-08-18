@@ -97,10 +97,11 @@ export default {
       }
     },
     editFiles(workFile) {
-      let newArr = JSON.parse(JSON.stringify(this.newForm.files))
-      newArr.forEach((el, i) => {
-        if (el.uuid !== workFile.uuid) 
-      })
+      const isActive = this.form.files.find(el => el.uuid == workFile.uuid)
+
+      if(isActive) {
+        this.form.files = this.form.files.filter(el => el.uuid !== workFile.uuid)
+      } else { this.form.files.push(workFile) }
     },
   },
   watch: {

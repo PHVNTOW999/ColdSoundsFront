@@ -15,11 +15,15 @@
           </div>
           <div class="editModalForm__cover-new">
             <b-field label="Included filename">
-              <b-field class="file is-primary" :class="{'has-name': !!newForm.cover}">
-                <b-upload :multiple="false" v-model="newForm.cover" name="file" class="file-label" rounded>
+              <b-field class="file is-primary" :class="{'has-name': !!coverFile.name}">
+                <b-upload class="file-label"
+                          :multiple="false"
+                          v-model="coverFile"
+                          name="file"
+                          rounded>
                 <span class="file-cta">
                   <b-icon class="file-icon" icon="upload"></b-icon>
-                  <span class="file-label">{{ newForm.cover.name || "Click to upload"}}</span>
+                  <span class="file-label">{{ coverFile.name || "Click to upload"}}</span>
                 </span>
                 </b-upload>
               </b-field>
@@ -70,6 +74,9 @@ export default {
           name: ""
         },
       },
+      coverFile: {
+        name: null,
+      },
     }
   },
   methods: {
@@ -114,8 +121,8 @@ export default {
         // this.newForm = {...this.form}
       }
     },
-    newCover() {
-      this.$store.dispatch('user/POST_FILE', this.newCover)
+    coverFile() {
+      this.$store.dispatch('user/POST_FILE', this.coverFile)
     }
   },
   created() {

@@ -122,7 +122,9 @@ export default {
       }
     },
     coverFile() {
-      this.$store.dispatch('user/POST_FILE', this.coverFile)
+      const formData = new FormData();
+      formData.append("file", this.coverFile);
+      this.$store.dispatch('user/POST_FILE', formData)
     }
   },
   created() {

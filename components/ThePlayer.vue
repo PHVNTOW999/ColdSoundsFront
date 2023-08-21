@@ -22,7 +22,7 @@
       <div class="meta w-1/3">
         <div v-if="this.env.format === 'Album'">
           <div class="cover w-20">
-            <img :src="env.cover">
+            <img :src="env.cover.file">
           </div>
           <div class="name">
             {{ track.name }}
@@ -32,8 +32,8 @@
           </div>
         </div>
         <div v-else>
-          <div class="cover w-20">
-            <img :src="track.cover || track.album.cover">
+          <div class="cover w-20" v-if="track.cover">
+            <img :src="track.cover.file || track.album.cover.file">
           </div>
           <div class="name">
             {{ track.name }}

@@ -11,7 +11,7 @@
       <form method="post" action="/" enctype="multipart/form-data" class="editModalForm">
         <div class="editModalForm__cover">
           <div class="editModalForm__cover-now">
-            <img :src="form.cover" class="max-w-xs" alt="">
+            <img :src="form.cover.file" class="max-w-xs" alt="">
           </div>
           <div class="editModalForm__cover-new">
             <b-field label="Included filename">

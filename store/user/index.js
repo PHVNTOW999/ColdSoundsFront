@@ -75,8 +75,7 @@ export const actions = {
   },
   POST_FILE({ commit }, payload) {
     return new Promise((res, rej) => {
-      console.log(payload)
-      this.$axios.$post('api/upload-file/', payload,
+      this.$axios.$post('api/img-file/', payload,
         {
           headers: { 'Content-Type': 'multipart/form-data' }
         }

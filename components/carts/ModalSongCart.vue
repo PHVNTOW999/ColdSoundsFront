@@ -9,7 +9,7 @@
       </div>
       <div class="modalWin__info">
         <div class="modalWin__cover">
-          <img class="modalWin__cover-img" :src="data.cover || data.album.cover">
+          <img class="modalWin__cover-img" :src="data.cover.file || data.album.cover.file">
         </div>
         <div class="modalWin__name">
           <h1>{{ data.name }}</h1>

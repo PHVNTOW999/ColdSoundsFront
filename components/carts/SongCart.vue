@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <img class="songCart__cover-img" :src="data.cover || data.album.cover">
+      <img class="songCart__cover-img" :src="data.cover.file || data.album.cover.file">
     </div>
 
     <div class="songCart__info text-center">

@@ -123,11 +123,9 @@ export default {
     playTrack() {
       if(this.track.files && this.play === false) {
         this.$refs.audio.play()
-        // this.play = true
         this.$store.commit('player/SET_PLAY', true)
       } else if(this.track.files && this.play === true) {
         this.$refs.audio.pause()
-        // this.play = false
         this.$store.commit('player/SET_PLAY', false)
       } else {
         const notif = this.$buefy.notification.open({

@@ -10,23 +10,23 @@
       </div>
       <form method="post" action="/" enctype="multipart/form-data" class="editModalForm">
         <div class="editModalForm__cover">
-          <div class="editModalForm__cover-now">
+          <div v-if="this.newCoverFile" class="editModalForm__cover-new">
+<!--            {{ 'http://127.0.0.1:8000/' + newCoverFile.file }}-->
+            <img :src="newCoverFile.file" class="max-w-xs" alt="">
+          </div>
+          <div v-else class="editModalForm__cover-now">
             <img :src="form.cover.file" class="max-w-xs" alt="">
           </div>
-          <div class="editModalForm__cover-new">
-            <b-field label="Included filename">
-              <b-field class="file is-primary" :class="{'has-name': !!coverFile.name}">
-                <b-upload class="file-label"
-                          :multiple="false"
-                          v-model="coverFile"
-                          name="file"
-                          rounded>
-                <span class="file-cta">
-                  <b-icon class="file-icon" icon="upload"></b-icon>
-                  <span class="file-label">{{ coverFile.name || "Click to upload"}}</span>
-                </span>
-                </b-upload>
-              </b-field>
+          <div class="editModalForm__cover-set">
+            <b-field class="file">
+              <b-upload v-model="coverFile" expanded>
+                <a class="button is-primary is-fullwidth">
+                  <b-icon icon="upload"></b-icon>
+                  <span>{{ coverFile.name || "Click to upload"}}</span>
+                </a>
+              </b-upload>
+              <b-button type="is-danger"
+                        icon-right="delete" />
             </b-field>
           </div>
         </div>
@@ -66,17 +66,10 @@ export default {
   data() {
     return {
       form: {},
-      newForm: {
-        uuid: null,
-        name: null,
-        files: null,
-        cover: {
-          name: ""
-        },
-      },
       coverFile: {
         name: null,
       },
+      newCoverFile: null,
     }
   },
   methods: {
@@ -110,27 +103,29 @@ export default {
         this.form.files = this.form.files.filter(el => el.uuid !== workFile.uuid)
       } else { this.form.files.push(workFile) }
     },
+    returnFullPath(file) {
+      console.log(window.location.host + file)
+      return window.location.host + file
+    }
   },
   watch: {
     data() {
       if(this.data.uuid !== this.form.uuid) {
-        // this.form = JSON.parse(JSON.stringify(this.data))
-        // this.newForm = JSON.parse(JSON.stringify(this.form))
         Object.assign(this.form, this.data);
-        Object.assign(this.newForm, this.form);
-        // this.newForm = {...this.form}
       }
     },
-    coverFile() {
+    async coverFile() {
       const formData = new FormData();
       formData.append("file", this.coverFile);
-      this.$store.dispatch('user/POST_FILE', formData)
+      const data = await this.$store.dispatch('user/POST_FILE', formData)
+      this.newCoverFile = data
+      console.log(data)
     }
   },
   created() {
     Object.assign(this.form, this.data);
-    Object.assign(this.newForm, this.form);
-    this.newForm.cover = { name: null }
+    // Object.assign(this.newForm, this.form);
+    // this.newForm.cover = { name: null }
   }
 }
 </script>

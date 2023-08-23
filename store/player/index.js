@@ -20,7 +20,8 @@ export const state = () => ({
     album: {
       cover: null,
     }
-  }
+  },
+  // settings: null,
 })
 
 export const getters = {

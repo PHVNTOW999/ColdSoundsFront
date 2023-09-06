@@ -12,7 +12,7 @@
         <div class="editModalForm__cover">
           <div v-if="this.newCoverFile" class="editModalForm__cover-new">
 <!--            {{ 'http://127.0.0.1:8000/' + newCoverFile.file }}-->
-            <img :src="newCoverFile.file" class="max-w-xs" alt="">
+            <img :src="'http://127.0.0.1:8000' + newCoverFile.file" class="max-w-xs" alt="">
           </div>
           <div v-else class="editModalForm__cover-now">
             <img :src="form.cover.file" class="max-w-xs" alt="">
@@ -76,6 +76,7 @@ export default {
     async sendForm() {
       const loadingComponent = this.$buefy.loading.open()
       try {
+        this.newCoverFile ? this.form.cover = this.newCoverFile : null
         await this.$store.dispatch('user/PATCH_PLAYLIST', this.form)
         this.$buefy.notification.open({
           message: 'Done!, your playlist is changed',
@@ -124,8 +125,6 @@ export default {
   },
   created() {
     Object.assign(this.form, this.data);
-    // Object.assign(this.newForm, this.form);
-    // this.newForm.cover = { name: null }
   }
 }
 </script>

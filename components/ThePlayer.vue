@@ -90,7 +90,11 @@
         <button @click="loopTrack()">Loop</button>
         <button>Add song</button>
         <button>Add song in...</button>
-        <button>Download</button>
+        <a :href="track.files" download target="_blank">
+          Download
+<!--          <b-button type="is-dark">Download</b-button>-->
+        </a>
+<!--        href="https://www.somesite.com/someAudioFile.mp3" download-->
       </div>
     </div>
 
@@ -184,7 +188,11 @@ export default {
     },
     hiddenCheckProg() {
       this.isShowCheckTime = false
-    }
+    },
+    // download() {
+    //   this.$refs.audio.dow
+      // href="https://www.somesite.com/someAudioFile.mp3" download
+    // }
   },
   computed: {
     play() {

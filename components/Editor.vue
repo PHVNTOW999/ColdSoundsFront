@@ -10,7 +10,7 @@
       </div>
       <form method="post" action="/" enctype="multipart/form-data" class="editModalForm">
         <div class="editModalForm__cover">
-          <div v-if="this.newCoverFile" class="editModalForm__cover-new">
+          <div v-if="this.newCoverFile != null" class="editModalForm__cover-new">
 <!--            {{ 'http://127.0.0.1:8000/' + newCoverFile.file }}-->
             <img :src="'http://127.0.0.1:8000' + newCoverFile.file" class="max-w-xs" alt="">
           </div>
@@ -25,7 +25,8 @@
                   <span>{{ coverFile.name || "Click to upload"}}</span>
                 </a>
               </b-upload>
-              <b-button type="is-danger"
+              <b-button @click="delEditCover()"
+                        type="is-danger"
                         icon-right="delete" />
             </b-field>
           </div>
@@ -104,9 +105,9 @@ export default {
         this.form.files = this.form.files.filter(el => el.uuid !== workFile.uuid)
       } else { this.form.files.push(workFile) }
     },
-    returnFullPath(file) {
-      console.log(window.location.host + file)
-      return window.location.host + file
+    delEditCover() {
+      this.coverFile = null
+      this.newCoverFile = null
     }
   },
   watch: {
@@ -120,7 +121,6 @@ export default {
       formData.append("file", this.coverFile);
       const data = await this.$store.dispatch('user/POST_FILE', formData)
       this.newCoverFile = data
-      console.log(data)
     }
   },
   created() {

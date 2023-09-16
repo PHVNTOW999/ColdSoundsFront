@@ -68,7 +68,14 @@ export const actions = {
   },
   PATCH_PLAYLIST({ commit }, payload) {
     return new Promise((res, rej) => {
-      this.$axios.$patch(`api/update-playlist/${payload.uuid}/`, payload).then((data) => {
+      this.$axios.$patch(`api/edit-playlist/${payload.uuid}/`, payload).then((data) => {
+        res(data)
+      }).catch((error) => { rej(console.error(error)) })
+    })
+  },
+  DEL_PLAYLIST({ commit }, payload) {
+    return new Promise((res, rej) => {
+      this.$axios.$delete(`api/edit-playlist/${payload.uuid}/`, payload).then((data) => {
         res(data)
       }).catch((error) => { rej(console.error(error)) })
     })

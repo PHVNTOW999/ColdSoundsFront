@@ -83,14 +83,12 @@ export default {
           message: 'Done!, your playlist is changed',
           type: 'is-success'
         })
-      }
-      catch(e) {
+      } catch(e) {
         this.$buefy.notification.open({
           message: `Error: ${e}`,
           type: 'is-danger',
         })
-      }
-      finally {
+      } finally {
         setTimeout(() => {
           this.$store.dispatch('user/GET_PLAYLISTS', this.$store.state.user.email)
         }, 100)

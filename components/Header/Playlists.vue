@@ -11,7 +11,7 @@
       <b-dropdown-item class="playlists flex justify-between"
                        aria-role="listitem"
                        v-for="(playlist, i) in playlists" :key="i">
-        <div class="modalWin__change-del">
+        <div class="modalWin__change-del" @click="alertDelete(playlist)">
           <b-icon
             icon="close"
             type="is-danger"
@@ -54,6 +54,38 @@ export default {
       data: null,
       modalActive: false,
       editModal: false,
+    }
+  },
+  methods: {
+    alertDelete(playlist) {
+      const alert = this.$buefy.dialog.confirm({
+        title: `Delete playlist "${playlist.name}"`,
+        message: 'Are you sure you want to <b>DELETE</b> your playlist? This playlist cannot be restored.',
+        confirmText: 'Delete playlist',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.delPlaylist(playlist)
+      })
+    },
+    async delPlaylist(playlist) {
+      const loadingComponent = this.$buefy.loading.open()
+      try {
+        await this.$store.dispatch('user/DEL_PLAYLIST', playlist)
+        this.$buefy.notification.open({
+          message: 'Done!, your playlist is delete',
+          type: 'is-success'
+        })
+      } catch (e) {
+        this.$buefy.notification.open({
+          message: `Error: ${e}`,
+          type: 'is-danger',
+        })
+      } finally {
+        setTimeout(() => {
+          this.$store.dispatch('user/GET_PLAYLISTS', this.$store.state.user.email)
+        }, 100)
+        loadingComponent.close()
+      }
     }
   },
   computed: {
